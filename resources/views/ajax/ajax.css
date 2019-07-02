@@ -1,0 +1,67 @@
+header {
+  float: left;
+  width: 70%;
+  height: 20%;
+  border: 2px red solid;
+  background-color: yellow;
+
+}
+footer {
+  float: left;
+  width: 70%;
+  height: 20%;
+  border: 2px red solid;
+  background-color: yellow;
+  position: absolute;
+  margin-top: 25%;
+}
+#error {
+  height: 50px;
+  width: 70%;
+  border: 2px red solid;
+  visibility: hidden;
+}
+section h3 {
+  margin-top: 20px;
+}
+#content {
+  float: left;
+  width: 50%;
+}
+#input {
+  float: right;
+width: 50%;
+margin-top: 20px;
+}
+section {
+  float: left;
+      position: absolute;
+      margin-top: 9%;
+      border: 2px red solid;
+      background-color: yellow;
+      width: 70%;
+      height: 30%;
+}
+
+#list1 {
+    float: right;
+    height: 100%;
+    width: 30%;
+    margin-top: -60px;
+}
+#list {
+    height: 100%;
+    width: 70%;
+    display: block;
+
+}
+
+header h2{
+color: blue;
+
+}
+
+.name{
+  padding-top: 1%;
+  border: 2px solid blue;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body onload="check()">
+
+<div id="demo">
+  <h2>Let AJAX change this text</h2>
+</div>
+
+
+<form name="myForm">
+  First Name: <input type="text" name="fname" id="fname" "/>
+  Password: <input type="text" name="password" id="password"/>
+<textarea rows="4" cols="50" id="hello" onkeyup="fill(this.value)"0>
+
+</textarea>
+<p id="hell"></p>
+<ul id="l1"></ul>
+
+
+
+<script type="text/javascript">
+
+function check(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+           if (this.readyState == 4 && this.status == 200) {
+               document.getElementById("l1").innerHTML = this.responseText;
+           }
+       };
+  xhttp.open("POST", "update.php", true);
+  xhttp.send();
+}
+
+function fill(str){
+  var name = document.getElementById("fname").value;
+  var password = document.getElementById("password").value;
+  var params = "q="+name+"&n="+password+"&chat="+str;
+  if(str.length == 0){
+    document.getElementById("hello").value = "";
+    return
+
+  }else{
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+
+    if(this.responseText == "no value"){
+
+        document.getElementById("hello").value = "No Vlaue";
+      }
+    };
+    xhttp.open("POST", "ajax.php?"+params, true);
+    xhttp.send();
+
+  }
+}
+
+</script>
+</body>
+</html>

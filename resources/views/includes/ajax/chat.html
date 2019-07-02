@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DataBase</title>
+    <link rel="stylesheet" type="text/css" href="ajax.css">
+
+</head>
+<body onload="check()">
+<header>
+<div id="list"><h3>LIST CURRENT NAMES IN DATABASE CHAT TABLE:</h3></div>
+<div id="list1"><ul id="l1"></ul></div>
+</header>
+<section>
+<div id="content">
+  <h3> ENTER YOUR NAME/PASSWORD</h3>
+</div>
+
+<div id="input">
+   <input type="text" name="fname" id="fname" "/> <br/><br/>
+   <input type="text" name="password" id="password"/>
+</div><br/><br/>
+
+<h3> CONTENT TRANSMITTED AS TYPED </h3>
+<div id="chat">
+  <textarea rows="4" cols="50" id="hello" onkeyup="fill(this.value)"0>
+
+  </textarea>
+</div>
+<div id="error">
+  <p id="errorm">Hello</p>
+</div>
+</section>
+<footer>
+<div id="check">
+  <div id="content">
+    <h3> ENTER Valid Name<br/> & RETRIEVE CHAT on Listen click</h3>
+  </div>
+
+  <div id="input">
+     <input type="text" name="firstname" id="firstname"/> <br/>
+     <button type="button" name="button" onclick="getData()">Listen</button>
+  </div>
+
+  <div id="chat">
+    <textarea rows="4" cols="50" id="cdata" onkeyup="fill(this.value)"0>
+
+    </textarea>
+  </div>
+
+</div>
+</footer>
+<script type="text/javascript">
+  function check(){
+    var name = document.getElementById("firstname").value;
+    if(name !== " "){
+      setInterval(getData, 3000);
+    }
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+             if (this.readyState == 4 && this.status == 200) {
+                 document.getElementById("l1").innerHTML = this.responseText;
+             }
+         };
+    xhttp.open("POST", "update.php", true);
+    xhttp.send();
+  }
+
+  function getData(){
+    var name = document.getElementById("firstname").value;
+      var params = "q="+name;
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+
+        if (this.readyState == 4 && this.status == 200) {
+                  document.getElementById("cdata").innerHTML = this.responseText;
+              }
+      };
+      xhttp.open("GET", "getchat.php?"+params, true);
+      xhttp.send();
+
+
+  }
+
+  function fill(str){
+    var name = document.getElementById("fname").value;
+    var password = document.getElementById("password").value;
+    var params = "q="+name+"&n="+password+"&chat="+str;
+    if(str.length == 0){
+      document.getElementById("hello").value = "";
+      return
+
+    }else{
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+
+      if(this.responseText == "no value"){
+
+
+          document.getElementById("error").style.visibility = "visible";
+          document.getElementById("errorm").innerHTML = "User "+name+" does not exist or have wrong password, hence no tramission will occur";
+
+
+        }
+      };
+      xhttp.open("POST", "ajax.php?"+params, true);
+      xhttp.send();
+
+    }
+  }
+
+</script>
+
+</body>
+
+</html>
